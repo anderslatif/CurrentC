@@ -1,0 +1,10 @@
+    The user interface must use HTML, CSS, Flexbox and JS (JQuery)
+
+    Create a system that uses AJAX and WEBSOCKETS
+
+    Create anything that involves multi-users/multi-players
+
+    Create a system that passes data between computers (client-server)
+
+    Use MongoDB as your database to CRUD
+
