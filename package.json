@@ -20,7 +20,7 @@
   "scripts": {
     "start-engine": "sudo service mongod start",
     "stop-engine": "sudo service mongod stop",
-    "start": "node src/server/index.js"
+    "start": "nodemon src/server.js"
   },
   "devDependencies": {}
 }
