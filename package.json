@@ -10,6 +10,7 @@
     "express": "^4.15.2",
     "lodash": "^4.17.4",
     "mongodb": "2.2.26",
+    "passport": "^0.3.2",
     "socket.io": "^1.7.3"
   },
   "repository": {
@@ -17,6 +18,8 @@
     "url": "https://github.com/anderslatif/Sequelize_With_External_DB"
   },
   "scripts": {
+    "start-engine": "sudo service mongod start",
+    "stop-engine": "sudo service mongod stop",
     "start": "node src/server/index.js"
   },
   "devDependencies": {}

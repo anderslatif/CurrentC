@@ -1,0 +1,5 @@
+
+To check if Mongod is running and see what port
+/var/log/mongodb/mongod.log
+
+
