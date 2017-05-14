@@ -1,13 +1,16 @@
 {
   "version": "0.0.1",
-  "description": "CurrentC the currency you can trust",
+  "description": "CurrentC - the electric currency you can trust",
   "author": "Anders",
   "license": "ISC",
   "dependencies": {
     "bitcoin-core": "^1.2.0",
     "bluebird": "^3.5.0",
+    "body-parser": "^1.17.1",
     "concurrently": "^3.3.0",
+    "cookie-parser": "^1.4.3",
     "express": "^4.15.2",
+    "express-session": "^1.15.2",
     "lodash": "^4.17.4",
     "mongodb": "2.2.26",
     "passport": "^0.3.2",
@@ -15,10 +18,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/anderslatif/Sequelize_With_External_DB"
+    "url": "https://github.com/anderslatif/CurrentC"
   },
   "scripts": {
-    "start-engine": "sudo service mongod start",
+    "start-engine": "service mongod start & tail -1 /var/log/mongodb/mongod.log",
+    "check-db-port": "",
     "stop-engine": "sudo service mongod stop",
     "start": "nodemon src/server.js"
   },

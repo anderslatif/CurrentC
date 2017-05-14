@@ -1,20 +1,73 @@
 var express = require("express");
 var app = express();
 
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+var session = require('express-session');
 
-app.use(express.static(__dirname + '/styles'));
+var Promise = require("bluebird");
 
-// improves HTTP headers for security reasons
+var mongoController = require('./server/mongoController');
+
+app.use(express.static(__dirname + '/client'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(cookieParser());
+app.use(session({
+                    secret:"secretphrasethatshouldbestoredinthedb",  //consider redis or memcache
+                    resave:false,
+                    saveUnitialized: true
+                }));
+
+
+/*// improves HTTP headers for security reasons
 var helmet = require("helmet");
-app.use(helmet);
+app.use(helmet);*/
 
 app.get("/", function(req, res) {
-    res.sendFile(__dirname+"/html/login.html");
+    res.sendFile(__dirname+"/client/login.html");
 });
 
 
-var mongo = require("mongodb").MongoClient;
-var path = "mongodb://localhost:27017/currentc";
+
+app.get("/login/:username/:password", function(req, res) {
+    var username = req.params.username;
+    var password = req.params.password;
+    res.sendFile(__dirname+"/client/dashboard.html");
+
+/*    var foundUser;
+    mongoController.checkIfUserExists({username: username, password: password}).then(function (foundUser) {
+        return foundUser;
+    }).then(function (foundUser) {
+        /!*    if(err) {
+         console.log(err);
+         return res.status(500).send();
+         }*!/
+        if(!foundUser) {
+            console.log("Invalid user");
+            res.status(404).send();
+        }
+        req.session.user = foundUser;
+        //res.status(200);
+        res.redirect('/dashboard');
+    });*/
+});
+
+app.get("/dashboard", function(req, res) {
+
+    if(!req.session.user) {
+        //res.status(401).send();
+        res.sendFile(__dirname+"/client/unauthorized.html");
+    }
+
+    res.sendFile(__dirname+"/client/dashboard.html");
+});
+
+app.get("/logout", function(req, res) {
+
+    req.logout();
+    res.redirect('/');
+});
 
 
 
@@ -25,7 +78,6 @@ port = NaN ? 3000 : port;
 
 
 var server = app.listen(port, function(err) {
-    console.log(__dirname+"");
     if (err) {
         console.log('Cannot listen on port %d. You can also add the portnumber as an argument to npm run start PORT', server.address().port)
     }

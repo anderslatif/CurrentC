@@ -1,0 +1,98 @@
+* {
+    font-family: "Roboto", sans-serif;
+}
+
+html, body {
+    height: 100%;
+}
+body {
+    margin: 0;
+}
+
+.login {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.login-box, .signup-box {
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    padding-bottom: 25px;
+}
+
+form input {
+    display: block;
+    margin: auto;
+    height: 25px;
+    margin-top: 5px;
+    padding-left: 5px;
+    background: #DCDCDC;
+}
+
+form button {
+    width: 60%;
+}
+
+.login-create-an-account {
+    display: block;
+    color: #ffa156;
+    font-size: 0.6em;
+    margin-top: 5px;
+}
+
+.login-button {
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 1.6em;
+    color: #FFFFFF;
+    background: -webkit-linear-gradient(left top, #ffa156, yellow); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, #ffa156, yellow); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, #ffa156, yellow); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, #ffa156, yellow); /* Standard syntax */
+}
+
+.login-button:hover {
+    background: -webkit-linear-gradient(left top, yellow, #ffa156); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, yellow, #ffa156); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, yellow, #ffa156); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, yellow, #ffa156); /* Standard syntax */
+}
+
+.signup-box {
+    display: none;
+}
+
+
+.signup-box button {
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 1.6em;
+    color: #FFFFFF;
+    background: -webkit-linear-gradient(left top, #2225ff, #1e5eff); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, #2225ff, #1e5eff); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, #2225ff, #1e5eff); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, #2225ff, #1e5eff); /* Standard syntax */
+}
+
+.signup-box button:hover {
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 1.6em;
+    color: #FFFFFF;
+    background: -webkit-linear-gradient(left top, #1e5eff, #2225ff); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, #1e5eff, #2225ff); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, #1e5eff, #2225ff); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, #1e5eff, #2225ff); /* Standard syntax */
+}
+
+
