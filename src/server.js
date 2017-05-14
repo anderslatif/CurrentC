@@ -33,24 +33,25 @@ app.get("/", function(req, res) {
 app.get("/login/:username/:password", function(req, res) {
     var username = req.params.username;
     var password = req.params.password;
+
     res.sendFile(__dirname+"/client/dashboard.html");
 
-/*    var foundUser;
-    mongoController.checkIfUserExists({username: username, password: password}).then(function (foundUser) {
-        return foundUser;
-    }).then(function (foundUser) {
-        /!*    if(err) {
-         console.log(err);
-         return res.status(500).send();
-         }*!/
-        if(!foundUser) {
-            console.log("Invalid user");
-            res.status(404).send();
-        }
-        req.session.user = foundUser;
-        //res.status(200);
-        res.redirect('/dashboard');
-    });*/
+    /*    var foundUser;
+        mongoController.checkIfUserExists({username: username, password: password}).then(function (foundUser) {
+            return foundUser;
+        }).then(function (foundUser) {
+            /!*    if(err) {
+             console.log(err);
+             return res.status(500).send();
+             }*!/
+            if(!foundUser) {
+                console.log("Invalid user");
+                res.status(404).send();
+            }
+            req.session.user = foundUser;
+            //res.status(200);
+            res.redirect('/dashboard');
+        });*/
 });
 
 app.get("/dashboard", function(req, res) {

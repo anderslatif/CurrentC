@@ -1,14 +1,14 @@
 var mongo = require("mongodb").MongoClient;
+exports.path = "mongodb://localhost:27017/currentc";
 var path = "mongodb://localhost:27017/currentc";
 var Promise = require("bluebird");
 var MongoClient = Promise.promisifyAll(require('mongodb').MongoClient);
-
-
 
 exports.checkIfUserExists = function(loginUser) {
     return MongoClient.connect(path).then( function(db) {
 
         var users = db.collection('users');
+        console.log("@@@@@@@@@@@@@", mongo.isConnected());
 
         return users.findOne(loginUser).then( function(foundUser) {
             db.close();

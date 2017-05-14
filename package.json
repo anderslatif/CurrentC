@@ -9,6 +9,7 @@
     "body-parser": "^1.17.1",
     "concurrently": "^3.3.0",
     "cookie-parser": "^1.4.3",
+    "describe": "^1.2.0",
     "express": "^4.15.2",
     "express-session": "^1.15.2",
     "lodash": "^4.17.4",
@@ -22,9 +23,13 @@
   },
   "scripts": {
     "start-engine": "service mongod start & tail -1 /var/log/mongodb/mongod.log",
+    "test": "node ./node_modules/mocha/bin/mocha",
     "check-db-port": "",
     "stop-engine": "sudo service mongod stop",
     "start": "nodemon src/server.js"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.3.0"
+  }
 }
