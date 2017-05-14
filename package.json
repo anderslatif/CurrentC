@@ -15,16 +15,16 @@
     "lodash": "^4.17.4",
     "mongodb": "2.2.26",
     "passport": "^0.3.2",
-    "socket.io": "^1.7.3"
+    "socket.io": "^1.7.3",
+    "toastr": "^2.1.2"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/anderslatif/CurrentC"
   },
   "scripts": {
-    "start-engine": "service mongod start & tail -1 /var/log/mongodb/mongod.log",
+    "start-engine": "sudo service mongod start && tail -1 /var/log/mongodb/mongod.log",
     "test": "node ./node_modules/mocha/bin/mocha",
-    "check-db-port": "",
     "stop-engine": "sudo service mongod stop",
     "start": "nodemon src/server.js"
   },
