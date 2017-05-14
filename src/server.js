@@ -81,7 +81,7 @@ app.get("/logout", function(req, res) {
 
 var portnumberCommandlineArg = process.argv.slice(2);
 var port = Number(portnumberCommandlineArg[0]);
-port = isNaN(port) ? 3000 : port;
+port = isNaN(port) || port < 1024 ? 3000 : port;
 
 
 var server = app.listen(port, function(err) {

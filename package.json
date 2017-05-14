@@ -23,7 +23,7 @@
     "url": "https://github.com/anderslatif/CurrentC"
   },
   "scripts": {
-    "start-engine": "sudo service mongod start && tail -1 /var/log/mongodb/mongod.log",
+    "start-engine": "sudo service mongod start & sleep 1 && tail -1 /var/log/mongodb/mongod.log",
     "test": "node ./node_modules/mocha/bin/mocha",
     "stop-engine": "sudo service mongod stop",
     "start": "nodemon src/server.js"
