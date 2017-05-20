@@ -64,7 +64,7 @@ app.get("/dashboard", function(req, res) {
 
     if(!req.session.user) {
         //res.status(401).send();
-        res.sendFile(__dirname+"/client/unauthorized.html");
+        res.redirect('/login');
     }
 
     res.sendFile(__dirname+"/client/dashboard.html");
