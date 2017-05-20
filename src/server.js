@@ -1,5 +1,6 @@
 var express = require("express");
 var app = express();
+var io = require("socket.io").listen(app);
 
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -62,10 +63,9 @@ app.post("/signup", function(req, res) {
 
 app.get("/dashboard", function(req, res) {
 
-    if(!req.session.user) {
-        //res.status(401).send();
+/*    if(!req.session.user) {
         res.redirect('/login');
-    }
+    }*/
 
     res.sendFile(__dirname+"/client/dashboard.html");
 });
@@ -79,8 +79,8 @@ app.get("/logout", function(req, res) {
 
 
 
-var portnumberCommandlineArg = process.argv.slice(2);
-var port = Number(portnumberCommandlineArg[0]);
+var portNumberCommandlineArg = process.argv.slice(2);
+var port = Number(portNumberCommandlineArg[0]);
 port = isNaN(port) || port < 1024 ? 3000 : port;
 
 
