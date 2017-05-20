@@ -1,25 +1,25 @@
 var express = require("express");
 var app = express();
-var io = require("socket.io").listen(app);
+
+var server = require("http").Server(app);
+var io = require("socket.io")(server);
+
+var bodyParser = require('body-parser');
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
 var session = require('express-session');
-
-var Promise = require("bluebird");
 
 var mongoController = require('./server/mongoController');
 
 app.use(express.static(__dirname + '/client'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(session({
                     secret: "secretphrasethatshouldbestoredinthedb",  //consider redis or memcache
                     resave: false,
                     saveUninitialized: true
                 }));
-
 
 
 
@@ -54,10 +54,10 @@ app.get("/login/:username/:password", function(req, res) {
 app.post("/signup", function(req, res) {
 
 
-     mongoController.createNewUser({"username": username, "password": password})
+     mongoController.createNewUser({"username": req.body.username, "password": req.body.password})
      .then(function (persistedUser) {
-     req.session.user = persistedUser;
-     res.redirect('/dashboard');
+         req.session.user = persistedUser;
+         res.redirect('/dashboard');
      });
 });
 
@@ -77,6 +77,29 @@ app.get("/logout", function(req, res) {
 });
 
 
+const os = require('os');
+var systemResourceData = {"cpu": os.loadavg()[0], "memory": os.totalmem()};
+// loadavg method returns an array containing the 1, 5, and 15 minute load averages.
+var cpuStat = require('cpu-stat');
+
+io.on("connection", function (socket) {
+    console.log("Client connected");
+
+    setInterval(function () {
+        cpuStat.usagePercent(function(err, percent, seconds) {
+            if (err) {
+                return console.log(err);
+            }
+            //the percentage cpu usage over all cores
+            systemResourceData.cpu = percent;
+        });
+        systemResourceData.memory = os.freemem() / os.totalmem() * 100;
+        socket.emit("systemResources", systemResourceData);
+    }, 1000);
+
+
+});
+
 
 
 var portNumberCommandlineArg = process.argv.slice(2);
@@ -84,9 +107,9 @@ var port = Number(portNumberCommandlineArg[0]);
 port = isNaN(port) || port < 1024 ? 3000 : port;
 
 
-var server = app.listen(port, function(err) {
+var serverConfig = server.listen(port, function(err) {
     if (err) {
-        console.log('Cannot listen on port %d. You can also add the port number as an argument to npm run start PORT', server.address().port)
+        console.log('Cannot listen on port %d. You can also add the port number as an argument to npm run start PORT', serverConfig.address().port)
     }
-    console.log('Listening on port %d', server.address().port);
+    console.log('Listening on port %d', serverConfig.address().port);
 });
