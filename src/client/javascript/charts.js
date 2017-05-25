@@ -29,10 +29,10 @@ function drawCharts(systemResources) {
 
 }
 
-
+var socket;
 $.get("/port", function (data) {
     var port = data.port;
-    var socket = io.connect("http://localhost:" + port);
+    socket = io.connect("http://localhost:" + port);
 
     socket.on("systemResources", function (data) {
         drawCharts(data);

@@ -11,7 +11,16 @@ $('.login-button').click(function() {
 
     var url = "/login/" + username + "/" + password;
     $.ajax({
-        url: url
+        url: url,
+        redirect: true,
+        success: function(data) {
+            if (data.success) {
+                window.location = '/dashboard';
+            } else {
+                toastr.error("The user does not exist.", "Please Sign up");
+                setTimeout( function () {}, 2000);
+            }
+        }
     });
 });
 
@@ -34,9 +43,17 @@ $('.signup-button').click(function() {
 
     var url = "/signup/";
     $.post(url, user).done(function(data) {
-        console.log("Callback data from signing up", data);
-        toastr.success("The user was created successfully."); //todo check if this is true and check what happens if non-unique usernames are used
-
+        if (data.success) {
+            toastr.success("The user was created successfully."); //todo check if this is true and check what happens if non-unique usernames are used
+            setTimeout( function () {
+                window.location = '/dashboard';
+            }, 1000);
+        } else {
+            toastr.error("The user already exists.");
+            setTimeout( function () {
+                window.location = '/';
+            }, 1000);
+        }
     })
 
 });

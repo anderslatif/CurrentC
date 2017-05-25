@@ -33,47 +33,55 @@ app.get("/login/:username/:password", function(req, res) {
     var username = req.params.username;
     var password = req.params.password;
 
+    var response = {"success": false};
+
         mongoController.checkIfUserExists({username: username, password: password}).then(function (foundUser) {
             return foundUser;
         }).then(function (foundUser) {
-            /*    if(err) {
-             console.log(err);
-             return res.status(500).send();
-             }*/
             if(!foundUser) {
                 console.log("Invalid user");
-                //res.status(404).send();
+            } else {
+                req.session.user = foundUser;
+                response.success = true;
             }
-            //req.session.user = foundUser;
-            //res.status(200);
-            res.redirect('/dashboard');
+            res.send(response)
         });
 });
 
 
 app.post("/signup", function(req, res) {
 
+    var response = {"success": false};
 
-     mongoController.createNewUser({"username": req.body.username, "password": req.body.password})
-     .then(function (persistedUser) {
-         req.session.user = persistedUser;
-         res.redirect('/dashboard');
-     });
+    mongoController.checkIfUserExists({username: req.body.username, password: req.body.password}).then(function (foundUser) {
+        if (!foundUser) {
+            mongoController.createNewUser({"username": req.body.username, "password": req.body.password})
+                .then(function (persistedUser) {
+                    response.success = true;
+                    req.session.user = persistedUser;
+                }).then( function() {
+                res.send(response);
+            });
+        } else {
+            res.send(response);
+        }
+    });
 });
 
 app.get("/dashboard", function(req, res) {
 
-/*    if(!req.session.user) {
-        res.redirect('/login');
-    }*/
+/*        if(!req.session.user) {
+            res.redirect('/login');
+        }*/
 
     res.sendFile(__dirname+"/client/dashboard.html");
 });
 
 app.get("/logout", function(req, res) {
 
-    req.logout();
-    res.redirect('/');
+    req.session.destroy(function (err) {
+        res.redirect('/');
+    });
 });
 
 
@@ -83,7 +91,7 @@ var systemResourceData = {"cpu": os.loadavg()[0], "memory": os.totalmem()};
 var cpuStat = require('cpu-stat');
 
 io.on("connection", function (socket) {
-    console.log("Client connected");
+    console.log("Client connected via socket");
 
     setInterval(function () {
         cpuStat.usagePercent(function(err, percent, seconds) {
