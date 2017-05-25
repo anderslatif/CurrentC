@@ -31,4 +31,13 @@ bitcoin_rpc.call('getinfo', [], function (err, res) {
     }
 });
 
+// potentially interesting methods
+
+// getbalance, getblockcount, getconnectioncount, getinfo, getpeerinfo, getrawmempool
+
+// listaccounts (bootstrap table)
+// https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_table_striped&stacked=h
+
+// getmininginfo https://developers.google.com/chart/interactive/docs/gallery/linechart
+
 

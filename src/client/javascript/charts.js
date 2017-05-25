@@ -29,8 +29,13 @@ function drawCharts(systemResources) {
 
 }
 
-var socket = io.connect("http://localhost:5003");
 
-socket.on("systemResources", function (data) {
-    drawCharts(data);
+$.get("/port", function (data) {
+    var port = data.port;
+    var socket = io.connect("http://localhost:" + port);
+
+    socket.on("systemResources", function (data) {
+        drawCharts(data);
+    });
 });
+

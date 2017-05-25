@@ -106,6 +106,9 @@ var portNumberCommandlineArg = process.argv.slice(2);
 var port = Number(portNumberCommandlineArg[0]);
 port = isNaN(port) || port < 1024 ? 3000 : port;
 
+app.get("/port", function(req, res) {
+    res.send({"port": port});
+});
 
 var serverConfig = server.listen(port, function(err) {
     if (err) {
