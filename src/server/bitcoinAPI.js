@@ -18,12 +18,12 @@ client.getInfo().then(function(error, help) {
 */
 
 
-var bitcoin_rpc = require('node-bitcoin-rpc');
-var port = 8332;
+var currentcRPC = require('node-bitcoin-rpc');
+var port = 2108;
 var rpcPassword = require("./GitGoAway").rpcPassword;
 
-bitcoin_rpc.init('localhost', port, 'anders', rpcPassword);
-bitcoin_rpc.call('getinfo', [], function (err, res) {
+currentcRPC.init('localhost', port, 'currentcrpc', rpcPassword);
+currentcRPC.call('getinfo', [], function (err, res) {
     if (err !== null) {
         console.log('I have an error :( ' + err + ' ' + res.error)
     } else {
