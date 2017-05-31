@@ -15,13 +15,13 @@ function drawCharts(systemResources) {
     ]);
 
     var options = {
-        width: 600, height: 220,
+        width: 400, height: 160,
         redFrom: 90, redTo: 100,
         yellowFrom:75, yellowTo: 90,
         minorTicks: 5
     };
 
-    var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+    var chart = new google.visualization.Gauge(document.getElementById('chart-div'));
 
     data.setValue(0, 1, systemResources.cpu);
     data.setValue(1, 1, systemResources.memory);

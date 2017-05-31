@@ -109,6 +109,21 @@ io.on("connection", function (socket) {
 });
 
 
+var bitcoinApi = require("./server/bitcoinAPI");
+app.get("/getpeerinfo", function (req, res) {
+
+    bitcoinApi.getpeerinfo().then( function (peerInfo) {
+        res.send(JSON.stringify(peerInfo));
+    });
+
+});
+
+app.get("/getinfo", function (req, res) {
+    bitcoinApi.getinfo().then( function(info) {
+        res.send(JSON.stringify(info));
+    })
+});
+
 
 var portNumberCommandlineArg = process.argv.slice(2);
 var port = Number(portNumberCommandlineArg[0]);

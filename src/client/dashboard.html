@@ -7,17 +7,58 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="styles/dashboard.css">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js"></script>
 </head>
 <body>
-    <h1>Dashboard</h1>
+    <div class="dashboard-header">
+        <img class="currentc-logo-dashboard" src="./styles/images/CurrentC_Logo.png" title="The electric currency you can trust"/>
+        <h1 class="dashboard-title">Dashboard</h1>
+        <button class="logout-button" onclick="logOut()">Log out</button>
+    </div>
+    <div class="container">
+        <table id="myinfotable" class="table table-striped">
+            <tbody>
+            <tr>
+                <th>Balance</th>
+                <td id="balance"></td>
+            </tr>
+            <tr>
+                <th>Blocks</th>
+                <td id="blocks"></td>
+            </tr>
+            <tr>
+                <th>Connections</th>
+                <td id="connections"></td>
+            </tr>            <tr>
+                <th>Difficulty target</th>
+                <td id="difficulty"></td>
+            </tr>            <tr>
+                <th>Keypool Size</th>
+                <td id="keypoolsize"></td>
+            </tr>
+            </tbody>
+        </table>
 
-    <button onclick="logOut()">Log out</button>
+        <table id="peertable" class="table table-striped">
+            <thead>
+                <th data-field="ipaddress">IP Address</th>
+                <th data-field="lastsend">Last Send</th>
+                <th data-field="lastreceived">Last Received</th>
+                <th data-field="bytessent">Bytes sent</th>
+                <th data-field="bytesreceived">Bytes received</th>
+                <th data-field="protocolversion">Protocol Version</th>
+                <th data-field="subversion">Source Code Version</th>
+            </thead>
+        </table>
+    </div>
 
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <div id="chart_div" style="width: 400px; height: 120px;"></div>
+    <footer class="chart-wrapper"><div id="chart-div" style="width: 400px; height: 120px;"></div></footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.slim.js"></script>
 

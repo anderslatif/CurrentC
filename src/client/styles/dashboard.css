@@ -1,0 +1,55 @@
+
+
+.currentc-logo-dashboard {
+    height: 60px;
+    width: 200px;
+    margin: 10px;
+}
+
+.dashboard-header {
+
+}
+
+.currentc-logo-dashboard {
+    display:inline-block;
+    vertical-align:middle;
+    height: 60px;
+    width: 200px;
+    margin: 10px;
+}
+
+.dashboard-title {
+    display:inline-block;
+    vertical-align:middle;
+    text-align: center;
+    color: #f4df41;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.logout-button {
+    display:inline-block;
+    vertical-align:middle;
+    float: right;
+
+    cursor: pointer;
+    font-size: 1.6em;
+    color: #FFFFFF;
+    border-color: transparent;
+    background: -webkit-linear-gradient(left top, #ffa156, yellow); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, #ffa156, yellow); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, #ffa156, yellow); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, #ffa156, yellow); /* Standard syntax */
+}
+
+.logout-button:hover {
+    background: -webkit-linear-gradient(left top, yellow, #ffa156); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, yellow, #ffa156); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, yellow, #ffa156); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, yellow, #ffa156); /* Standard syntax */
+}
+
+.chart-wrapper {
+    position: fixed;
+    bottom: 0;
+    margin-bottom: 40px;
+}

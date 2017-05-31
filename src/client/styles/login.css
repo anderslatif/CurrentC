@@ -95,4 +95,9 @@ form button {
     background: linear-gradient(to bottom right, #1e5eff, #2225ff); /* Standard syntax */
 }
 
-
+.currentc-logo-login {
+    position: absolute;
+    height: 60px;
+    width: 200px;
+    margin: 10px;
+}

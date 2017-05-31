@@ -1,42 +1,34 @@
-/*const Client = require('bitcoin-core');
-const client = new Client({
-                            port: 8332,
-                            host: 'localhost',
-                            // network: 'regtest',
-                            user: 'anders',
-                            pass: 'rpcPassword',
-                            version: '0.9.0'
-                        });
-var Promise = require("bluebird");
-
-client.command('foobar');*/
-
-/*
-client.getInfo().then(function(error, help) {
-    console.log(help);
-});
-*/
-
-
 var currentcRPC = require('node-bitcoin-rpc');
 var port = 2108;
-var rpcPassword = require("./GitGoAway").rpcPassword;
+var rpcUsername = "currentcrpc";
+var rpcPasswordLocal = require("./GitGoAway").rpcPasswordLocal;
+var rpcPasswordServer = require("./GitGoAway").rpcPasswordDigitalOcean;
+var ipAddressServer = require("./GitGoAway").ipAddressDigitalOcean;
 
-currentcRPC.init('localhost', port, 'currentcrpc', rpcPassword);
-currentcRPC.call('getinfo', [], function (err, res) {
-    if (err !== null) {
-        console.log('I have an error :( ' + err + ' ' + res.error)
-    } else {
-        console.log(JSON.stringify(res.result));
-    }
+var currentc = require( 'bitcoin-promise' ) ;
+
+
+var client = new currentc.Client({
+    host: 'localhost',
+    port: port,
+    user: rpcUsername,
+    pass: rpcPasswordLocal,
+    timeout: 30000
 });
 
-// potentially interesting methods
 
-// getbalance, getblockcount, getconnectioncount, getinfo, getpeerinfo, getrawmempool
+exports.getpeerinfo = function(){
+    return client.getPeerInfo().then(function (peerinfo) {
+        return peerinfo
+    });
+};
 
-// listaccounts (bootstrap table)
-// https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_table_striped&stacked=h
+exports.getinfo = function(){
+    return client.getInfo().then(function (info) {
+        return info
+    });
+};
+
 
 // getmininginfo https://developers.google.com/chart/interactive/docs/gallery/linechart
 
