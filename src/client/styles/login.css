@@ -101,3 +101,7 @@ form button {
     width: 200px;
     margin: 10px;
 }
+
+.flex-item {
+    margin: 0px 20px 0 20px;
+}

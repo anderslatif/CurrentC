@@ -12,6 +12,7 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 
 var mongoController = require('./server/mongoController');
+var sanitize = require('mongo-sanitize');
 
 app.use(express.static(__dirname + '/client'));
 app.use(cookieParser());
@@ -30,8 +31,8 @@ app.get("/", function(req, res) {
 
 
 app.get("/login/:username/:password", function(req, res) {
-    var username = req.params.username;
-    var password = req.params.password;
+    var username = sanitize(req.params.username);
+    var password = sanitize(req.params.password);
 
     var response = {"success": false};
 
@@ -53,7 +54,10 @@ app.post("/signup", function(req, res) {
 
     var response = {"success": false};
 
-    mongoController.checkIfUserExists({username: req.body.username, password: req.body.password}).then(function (foundUser) {
+    var username = sanitize(req.body.username);
+    var password = sanitize(req.body.password);
+
+    mongoController.checkIfUserExists({username: username, password: password}).then(function (foundUser) {
         if (!foundUser) {
             mongoController.createNewUser({"username": req.body.username, "password": req.body.password})
                 .then(function (persistedUser) {
